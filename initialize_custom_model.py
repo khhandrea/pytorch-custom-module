@@ -49,14 +49,15 @@ def initialize_custom_model(
 
         # Activation layer
         if layer_spec['layer'] in ('linear', 'conv2d'):
+            if not layer_spec['activation']:
+                return model
+
             if layer_spec['activation'] == 'relu':
                 activation = nn.ReLU()
             elif layer_spec['activation'] == 'elu':
                 activation = nn.ELU()
             elif layer_spec['activation'] == 'softmax':
                 activation = nn.Softmax(dim=1)
-            elif layer_spec['activation'] == 'none':
-                return model
             else:
                 raise Exception(f"Invalid activation: {layer_spec['activation']}")
             model.add_module(str(layer_idx), activation)

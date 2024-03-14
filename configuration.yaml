@@ -22,7 +22,7 @@ network_spec:
       - layer: flatten
 
   linear:
-    initialization: True
+    initialization: false
     layers:
       - layer: linear
         spec: [512, 256]
