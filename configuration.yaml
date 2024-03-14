@@ -30,27 +30,3 @@ network_spec:
       - layer: linear
         spec: [256, 5]
         activation: softmax
-
-  actor_critic:
-    initialization: True
-    layers:
-      - layer: linear
-        spec: [256, 128]
-        activation: relu
-      - layer: linear
-        spec: [128, 64]
-        activation: relu
-    actor_layers:
-      - layer: linear
-        spec: [64, 64]
-        activation: relu
-      - layer: linear
-        spec: [64, 4]
-        activation: softmax
-    critic_layers:
-      - layer: linear
-        spec: [64, 64]
-        activation: relu
-      - layer: linear
-        spec: [64, 1]
-        activation: None

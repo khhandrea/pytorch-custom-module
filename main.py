@@ -11,9 +11,15 @@ if __name__ == '__main__':
     models = {}
     for key in config['network_spec']:
         models[key] = initialize_custom_model(config['network_spec'][key])
-        # print('model')
-        # print(models[key])
+        print(f"[{key} model]")
+        print(models[key])
 
-    input1 = rand((4, 512))
-    output1 = models['linear'](input1)
-    print('cnn:', output1.shape)
+    model_input = rand((4, 3, 32, 32))
+    model_output = models['cnn'](model_input)
+    print('cnn input:', model_input.shape)
+    print('cnn output:', model_output.shape)
+
+    model_input = rand((4, 512))
+    model_output = models['linear'](model_input)
+    print('linear input:', model_input.shape)
+    print('linear output:', model_output.shape)
