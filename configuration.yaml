@@ -1,0 +1,56 @@
+network_spec:
+  cnn:
+    initialization: True
+    layers:
+      # 3 x 64 x 64
+      - layer: conv2d 
+        spec: [3, 32, 3, 2, 1]
+        activation: elu
+        # 32 x 32 x 32
+      - layer: conv2d
+        spec: [32, 32, 3, 2, 1]
+        activation: elu
+        # 32 x 16 x 16
+      - layer: conv2d
+        spec: [32, 32, 3, 2, 1]
+        activation: elu
+        # 32 x 8 x 8 
+      - layer: conv2d
+        spec: [32, 32, 3, 2, 1]
+        activation: elu
+        # 32 x 4 x 4 (= 256)
+      - layer: flatten
+
+  linear:
+    initialization: True
+    layers:
+      - layer: linear
+        spec: [512, 256]
+        activation: relu
+      - layer: linear
+        spec: [256, 5]
+        activation: softmax
+
+  actor_critic:
+    initialization: True
+    layers:
+      - layer: linear
+        spec: [256, 128]
+        activation: relu
+      - layer: linear
+        spec: [128, 64]
+        activation: relu
+    actor_layers:
+      - layer: linear
+        spec: [64, 64]
+        activation: relu
+      - layer: linear
+        spec: [64, 4]
+        activation: softmax
+    critic_layers:
+      - layer: linear
+        spec: [64, 64]
+        activation: relu
+      - layer: linear
+        spec: [64, 1]
+        activation: None
