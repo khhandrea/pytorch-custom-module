@@ -4,7 +4,7 @@
 
 ## Rules
 - def initialize_custom_model(spec: dict) -> pytorch.nn.Module
-- 'spec' must have form of:
+- 'spec' must have form of below. Be careful of RNN input/output!
 
 ```
 initialization: bool
@@ -21,6 +21,18 @@ activation: activation
 ```
 layer: 'conv2d'
 spec: [IN_CHANNEL, OUT_CHANNEL, KERNEL_SIZE, STRIDE, PADDING]
+activation: activation
+```
+
+```
+layer: 'rnn'
+spec: [INPUT_SIZE, HIDDEN_SIZE, NUM_LAYERS]
+activation: activation
+```
+
+```
+layer: 'lstm'
+spec: [INPUT_SIZE, HIDDEN_SIZE, NUM_LAYERS]
 activation: activation
 ```
 

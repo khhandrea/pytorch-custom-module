@@ -23,3 +23,8 @@ if __name__ == '__main__':
     model_output = models['linear'](model_input)
     print('linear input:', model_input.shape)
     print('linear output:', model_output.shape)
+
+    model_input = rand((4, 256, 260))
+    output, (h_n, c_n) = models['lstm'](model_input)
+    print('lstm input:', model_input.shape)
+    print('lstm output:', output.shape, h_n.shape, c_n.shape)

@@ -25,6 +25,12 @@ def initialize_custom_model(
         elif layer_spec['layer'] == 'conv2d':
             in_channels, out_channels, kernel_size, stride, padding = layer_spec['spec']
             module = nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding)
+        elif layer_spec['layer'] == 'rnn':
+            input_size, hidden_size, num_layers = layer_spec['spec']
+            module = nn.RNN(input_size, hidden_size, num_layers)
+        elif layer_spec['layer'] == 'lstm':
+            input_size, hidden_size, num_layers = layer_spec['spec']
+            module = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
         elif layer_spec['layer'] == 'flatten':
             module = nn.Flatten()
         else:

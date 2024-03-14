@@ -30,3 +30,10 @@ network_spec:
       - layer: linear
         spec: [256, 5]
         activation: softmax
+
+  lstm:
+    initialization: True
+    layers:
+      - layer: lstm
+        spec: [260, 256, 1]
+        activation: relu
