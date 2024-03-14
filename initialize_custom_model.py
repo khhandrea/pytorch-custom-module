@@ -5,6 +5,15 @@ from torch import nn
 def initialize_custom_model(
         spec: dict[str, Any]
     ) -> nn.Module:
+    '''
+    returns pytorch.nn.Module according to set object
+
+    Args:
+        spec(dict[str, Any]): pytorch module spec. See below to look the rules: https://github.com/khhandrea/pytorch-initialize-module-from-yaml/README/md
+    
+    Returns
+        module(pytorch.nn.Module): pytorch module
+    '''
     model = nn.Sequential()
 
     layer_idx = 0
