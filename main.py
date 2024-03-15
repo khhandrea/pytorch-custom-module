@@ -1,7 +1,7 @@
 from torch import rand
 from yaml import full_load
 
-from initialize_custom_model import initialize_custom_model
+from custom_module import CustomModule
 
 if __name__ == '__main__':
     load_path = './configuration.yaml'
@@ -10,7 +10,7 @@ if __name__ == '__main__':
 
     models = {}
     for key in config['network_spec']:
-        models[key] = initialize_custom_model(config['network_spec'][key])
+        models[key] = CustomModule(config['network_spec'][key])
         print(f"[{key} model]")
         print(models[key])
 
@@ -24,7 +24,9 @@ if __name__ == '__main__':
     print('linear input:', model_input.shape)
     print('linear output:', model_output.shape)
 
-    model_input = rand((4, 256, 260))
-    output, (h_n, c_n) = models['lstm'](model_input)
+    model_input = rand((128, 260))
+    h_0 = rand((1, 256))
+    c_0 = rand((1, 256))
+    output, (h_n, c_n) = models['lstm'](model_input, (h_0, c_0))
     print('lstm input:', model_input.shape)
     print('lstm output:', output.shape, h_n.shape, c_n.shape)
