@@ -34,13 +34,16 @@ class CustomModule(nn.Module):
             elif layer_spec['layer'] == 'lstm':
                 input_size, hidden_size, num_layers = layer_spec['spec']
                 module = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
+            elif layer_spec['layer'] == 'gru':
+                input_size, hidden_size, num_layers = layer_spec['spec']
+                module = nn.GRU(input_size, hidden_size, num_layers, batch_first=True)
             elif layer_spec['layer'] == 'flatten':
                 module = nn.Flatten()
             else:
                 raise Exception(f"Invalid layer name: {layer_spec['layer']}")
 
             # Parameter initialization
-            if layer_spec['layer'] in ('linear', 'conv2d'):
+            if layer_spec['layer'] in ('linear', 'conv2d', 'lstm', 'gru'):
                 if bool(spec['initialization']) == 'True':
                     if layer_spec['activation'] in ('relu', 'elu'):
                         nn.init.kaiming_uniform_(module.weight)

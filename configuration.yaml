@@ -31,9 +31,9 @@ network_spec:
         spec: [256, 5]
         activation: softmax
 
-  lstm:
+  gru:
     initialization: True
     layers:
-      - layer: lstm
+      - layer: gru
         spec: [260, 256, 1]
         activation: relu

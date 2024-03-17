@@ -26,7 +26,6 @@ if __name__ == '__main__':
 
     model_input = rand((128, 260))
     h_0 = rand((1, 256))
-    c_0 = rand((1, 256))
-    output, (h_n, c_n) = models['lstm'](model_input, (h_0, c_0))
-    print('lstm input:', model_input.shape)
-    print('lstm output:', output.shape, h_n.shape, c_n.shape)
+    output, h_n = models['gru'](model_input, h_0)
+    print('gru input:', model_input.shape)
+    print('gru output:', output.shape, h_n.shape)
