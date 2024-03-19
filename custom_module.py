@@ -43,12 +43,21 @@ class CustomModule(nn.Module):
                 raise Exception(f"Invalid layer name: {layer_spec['layer']}")
 
             # Parameter initialization
-            if layer_spec['layer'] in ('linear', 'conv2d', 'lstm', 'gru'):
-                if bool(spec['initialization']) == 'True':
-                    if layer_spec['activation'] in ('relu', 'elu'):
+            kaiming_type_activation = ('relu', 'elu')
+            xavier_type_activation = ('softmax',)
+            if layer_spec['layer'] in ('linear', 'conv2d'):
+                if spec['initialization']:
+                    if layer_spec['activation'] in kaiming_type_activation:
                         nn.init.kaiming_uniform_(module.weight)
-                    elif layer_spec['activation'] in ('softmax'):
+                    elif layer_spec['activation'] in xavier_type_activation:
                         nn.init.xavier_uniform_(module.weight)
+            elif layer_spec['layer'] in ('lstm', 'gru'):
+                if spec['initialization']:
+                    for param in module.parameters():
+                        if len(param.shape) >= 2:
+                            nn.init.orthogonal_(param)
+                        else:
+                            nn.init.normal_(param)
 
             module_list.append(module)
             layer_idx += 1
