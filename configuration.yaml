@@ -6,20 +6,21 @@ network_spec:
       - layer: conv2d 
         spec: [3, 32, 3, 2, 1]
         activation: elu
-        # 32 x 32 x 32
+      # 32 x 32 x 32
       - layer: conv2d
         spec: [32, 32, 3, 2, 1]
         activation: elu
-        # 32 x 16 x 16
+      # 32 x 16 x 16
       - layer: conv2d
         spec: [32, 32, 3, 2, 1]
         activation: elu
-        # 32 x 8 x 8 
+      # 32 x 8 x 8 
       - layer: conv2d
         spec: [32, 32, 3, 2, 1]
         activation: elu
-        # 32 x 4 x 4 (= 256)
+      # 32 x 4 x 4
       - layer: flatten
+      # 256
 
   linear:
     initialization: false
@@ -36,4 +37,3 @@ network_spec:
     layers:
       - layer: gru
         spec: [260, 256, 1]
-        activation: relu
